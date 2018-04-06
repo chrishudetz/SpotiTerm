@@ -40,7 +40,7 @@ To operate SpotiTerm you must:
       ```
 ## Authors -- Contributors
 
-* **Daniel Brennand** - *Creator* - [Dextroz](https://github.com/Dextroz)
+* **Daniel Brennand** - *Author* - [Dextroz](https://github.com/Dextroz)
 
 ## License
 
