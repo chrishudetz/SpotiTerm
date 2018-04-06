@@ -1,4 +1,6 @@
 # SpotiTerm
+![SpotiTerm](spotiterm.png)
+
 A Terminal Interface using Spotipy to utalise Spotify's Web API.
 
 ## Disclaimer
