@@ -1,10 +1,10 @@
 # SpotiTerm
 ![SpotiTerm](spotiterm.png)
 
-A Terminal Interface using Spotipy to utalise Spotify's Web API.
+A Terminal Interface to perform actions with Spotify's Web API.
 
 ## Disclaimer
-This is my first proper project I have ever uploaded to Github, so please keep this in mind if I'm a little slow. Still adjusting and learning the flow. Thanks, Dextroz.
+This is my first project I have ever uploaded to Github, so please keep this in mind if I'm a little slow. Still adjusting and learning the flow. Thanks, Dextroz.
 
 ## Dependencies
 SpotiTerm is written in Python 3 so it is **REQUIRED**.
@@ -32,7 +32,7 @@ To operate SpotiTerm you must:
   
   3. Navigate to you're apps dashboard and copy the Client ID and Client Secret.
   
-  4. Place these in the respective variables found in [config.py](config.py):
+  4. Place **Client ID** and **Client Secret** in the respective variables found in [config.py](config.py):
       ```
       CLIENT_ID = "Insert Client ID Here"
       CLIENT_S = "Insert Client Secret Here"
@@ -44,7 +44,7 @@ To operate SpotiTerm you must:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 
