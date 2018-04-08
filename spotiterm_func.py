@@ -337,7 +337,7 @@ def add_del_track():
             return track_ids
         else:
             print(green("Input a valid option: "))
-            track_ids()
+            add_del_track()
     except:
         print(green("An error occured in add_del_track()"))
         sleep(2)
