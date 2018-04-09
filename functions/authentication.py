@@ -6,13 +6,13 @@ user authentication.
 try:
     from huepy import green, info
     # Client ID, Client Secret, Redirect uri (for user_auth())
-    from config import CLIENT_ID, CLIENT_S, REDIRECT_URI
+    from .config import CLIENT_ID, CLIENT_S, REDIRECT_URI
     import spotipy
     from spotipy.oauth2 import SpotifyClientCredentials
     import spotipy.util as util
     from time import sleep
 except ImportError:
-    print("Imports failed. Check packages are installed.")
+    print("Imports failed for authentication.py")
 
 """
 User authentication function. Asks for Spotify Username and scope is passed in for use
@@ -20,7 +20,7 @@ for specific options.
 Args:
     Scope = passed in as str when called at SpotiTerm.py
 Returns:
-    username, token objects.
+    username, token
 Exceptions:
     spotipy.oauth2.SpotifyOauthError
 """
@@ -49,7 +49,7 @@ Exceptions:
 
 def auth():
     try:
-        # authorisation. Gets token for application. CLIENT_ID and CLIENT_SECRET passed in.
+        # authorisation. Gets token for functions. CLIENT_ID and CLIENT_SECRET passed in.
         client_credentials = SpotifyClientCredentials(
             client_id=CLIENT_ID, client_secret=CLIENT_S)
         # sp currently for global use.

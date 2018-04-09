@@ -2,10 +2,23 @@
 Main Entry point for SpotiTerm. Contains spotiterm main menu.
 """
 try:
-    # Import all functions for usage from spotiterm_func
-    from spotiterm_func import *
+    # Import all functions for usage in SpotiTerm.py (main entry.)
+    import spotipy
+    from huepy import green, info
+    from time import sleep
+    import subprocess
+    import platform
+    from functions.config import CLIENT_ID, CLIENT_S, REDIRECT_URI
+    from functions.authentication import user_auth, auth
+    from functions.spotiterm_func import menu_options, logo, clear
+    from functions.option1 import track_search, browser_open
+    from functions.option2 import artist_top_10
+    from functions.option3 import user_top_tracks
+    from functions.option4 import user_top_artist
+    from functions.option5 import list_tracks, playlist_contents
+    from functions.option6 import add_del_track, playlist
 except ImportError:
-    print("Functions file failed to import.")
+    print("Imports failed. Examine Error.")
 
 """
 The main menu procedure for SpotiTerm
