@@ -25,6 +25,9 @@ def add_del_track():
             info(green("One or more tracks: One or More: ")))
         if (track_numbers) == ("One"):
             # Single track ID select. Input track ID.
+            # .split() is used due to user_playlist_add_tracks and
+            # user_playlist_remove_all_occurrences_of_tracks accepting track_ids
+            # as list only. .split() makes it a list object.
             track_ids = input(info(green("Input track ID: "))).split()
             # Return track_ids for use in playlist()
             return track_ids
