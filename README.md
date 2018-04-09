@@ -19,8 +19,7 @@ This is a entertainment project for me, as I'm an avid Spotify user!
 ### Future Features -- Changes in mind
   1. Player Controls: Play, Pause, Seek, shuffle, repeat, current playback info etc.
   2. Track audio analysis.
-  3. Seperation of Concerns.
-  4. and More!
+  3. and More!
 
 ## Dependencies
 SpotiTerm is written in Python 3 so it is **REQUIRED**.
@@ -33,27 +32,27 @@ SpotiTerm requires the following dependencies:
 
 ## Prerequisites
 To operate SpotiTerm you must:
-  
+
   1. Have a **Spotify** Account.
 
-  1. Go to Spotify's developer website and [create an application](https://beta.developer.spotify.com/dashboard/login). 
-  
+  1. Go to Spotify's developer website and [create an application](https://beta.developer.spotify.com/dashboard/login).
+
   2. Go to your applications settings and add you're preferred redirect URI (I chose "http://localhost:8888").
-  
+
   3. Navigate to you're apps dashboard and copy the Client ID and Client Secret.
-  
-  4. Place **Client ID**, **Client Secret** and **Redirect URI** in the respective variables found in [config.py](config.py):
+
+  4. Place **Client ID**, **Client Secret** and **Redirect URI** in the respective variables found in [config.py](functions/config.py):
       ```
       CLIENT_ID = "Insert Client ID Here."
       CLIENT_S = "Insert Client Secret Here."
       REDIRECT_URI = "Insert Redirect URI Here."
       ```
 ### Recommended
-To enjoy the full beauty of SpotiTerm, I recommend the use of a dark terminal theme. 
+To enjoy the full beauty of SpotiTerm, I recommend the use of a dark terminal theme.
 [OSX Terminal Themes](https://github.com/lysyi3m/osx-terminal-themes/blob/master/schemes/Darkside.terminal) from [Emil Kashkevich (lysyi3m)](https://github.com/lysyi3m). I recommend the Darkside theme.
 
 ## Download Options -- Installing
-Currently you can only clone or download the project ZIP file.
+Currently you can only clone or download the project ZIP file. (Recommended clone if you're going to be contributing.)
 
 Extract and navigate to the zipfile directory and run SpotiTerm by executing the main entry point file (SpotiTerm.py):
   ```
