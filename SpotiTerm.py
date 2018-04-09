@@ -65,7 +65,7 @@ def spotiterm():
         elif (user_input) == ("6"):
             clear()
             # Asks user if a public or private playlist is for tracks to be
-            # remmoved or deleted.
+            # removed or deleted.
             public_private = input(
                 info(green("Public or Private Playlist: ")))
             if (public_private) == ("Public"):
