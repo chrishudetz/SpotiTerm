@@ -76,7 +76,7 @@ def browser_open(url):
                 elif (user_platform) == ("Windows"):
                     subprocess.call(["chrome.exe", url])
             else:
-                # If any other input ie No. clear to main menu (spotiterm)
+                # If any other input ie No. Exit to main menu (spotiterm)
                 pass
     except subprocess.CalledProcessError:
         print(green("Failed. Check your system has Chrome installed."))
