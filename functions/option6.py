@@ -23,15 +23,15 @@ def add_del_track():
     try:
         track_numbers = input(
             info(green("One or more tracks: One or More: ")))
-        if (track_numbers) == ("More"):
+        if (track_numbers) == ("One"):
+            # Single track ID select. Input track ID.
+            track_ids = input(info(green("Input track ID: "))).split()
+            # Return track_ids for use in playlist()
+            return track_ids
+        elif (track_numbers) == ("More"):
             # Input tracks seperated by ","
             track_ids = input(
                 info(green("Track Ids seperated by , : "))).split(",")
-            # Return track_ids for use in playlist()
-            return track_ids
-        elif (track_numbers) == ("One"):
-            # Single track ID select. Input track ID.
-            track_ids = input(info(green("Input track ID: "))).split()
             # Return track_ids for use in playlist()
             return track_ids
         else:
