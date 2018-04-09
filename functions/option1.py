@@ -11,7 +11,6 @@ try:
     import spotipy.oauth2
     import subprocess
     import platform
-    from .spotiterm_func import clear
 except ImportError:
     print("Failed to import modules for option1.py")
 
