@@ -45,7 +45,7 @@ def user_top_tracks(username_token):
             # Sleep for user to observe output.
             sleep(15)
         else:
-            print(green("Token could not be recieved for {}".format(username)))
+            print(green("Can't get token for {}".format(username)))
             sleep(2)
     except spotipy.client.SpotifyException:
         print(green("User Top Track Lookup Failed."))

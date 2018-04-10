@@ -40,7 +40,7 @@ def user_top_artist(username_token):
                 print(green(" ""{} {}".format(i, item["name"])))
             sleep(15)
         else:
-            print(green("Token could not be recieved for {}".format(username)))
+            print(green("Can't get token for {}".format(username)))
             sleep(2)
     except spotipy.client.SpotifyException:
         print(green("User Top Artist Lookup Failed."))

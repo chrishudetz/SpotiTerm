@@ -55,8 +55,8 @@ def playlist_contents(username_token):
                     sleep(1)
                     print(green(" ""Total Tracks: {}".format(
                         playlist["tracks"]["total"])))
-                    # Slows down output. Gives user time to read.
                     sleep(1)
+                    # tracks,next fields required for usage in list_tracks()
                     resp = sp.user_playlist(
                         username, playlist["id"], fields="tracks,next")
                     tracks = resp["tracks"]

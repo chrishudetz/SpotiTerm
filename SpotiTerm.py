@@ -3,11 +3,8 @@ Main Entry point for SpotiTerm. Contains spotiterm main menu.
 """
 try:
     # Import all functions for usage in SpotiTerm.py (main entry.)
-    import spotipy
     from huepy import green, info
     from time import sleep
-    import subprocess
-    import platform
     from functions.config import CLIENT_ID, CLIENT_S, REDIRECT_URI
     from functions.authentication import user_auth, auth
     from functions.spotiterm_func import menu_options, logo, clear
@@ -26,11 +23,11 @@ The main menu procedure for SpotiTerm
 
 
 def spotiterm():
-    # Clears terminal before menu prints.
-    clear()
-    # While loop to always go back to menu when action performed.
+    # While loop to always go back to menu after action performed.
     while (True):
-        # Prints menu options.
+        # Clear terminal.
+        clear()
+        # Prints menu options (See spotiterm_func.py)
         menu_options()
         user_input = input(
             info(green("Select a menu option: ")))
@@ -39,47 +36,50 @@ def spotiterm():
             # Executes track_search(), passing in auth() return (sp object) into
             # it. Then browser_open() executes.
             browser_open(track_search(auth()))
-            # Clear terminal when finished.
             clear()
         elif (user_input) == ("2"):
             clear()
-            # Executes artist_top_10(), passing in auth() return (sp object) into
-            # it.
+            # Executes artist_top_10(), passing in auth() return (sp object).
             artist_top_10(auth())
             clear()
         elif (user_input) == ("3"):
             clear()
             # Executes user_top_tracks(), user_auth() passed in to get username
-            # and token for user_top_tracks(). Scope is also passsed in for
-            # user_auth() to use.
+            # and token for use. Scope passed in for user_auth().
             user_top_tracks(user_auth("user-top-read"))
             clear()
         elif (user_input) == ("4"):
             clear()
+            # Executes user_top_artist(), user_auth() passed in to get username
+            # and token for use. Scope passed in for user_auth().
             user_top_artist(user_auth("user-top-read"))
             clear()
         elif (user_input) == ("5"):
             clear()
+            # Executes playlist_contents(), user_auth() passed in to get username
+            # and token for use. Scope passed in for user_auth().
             playlist_contents(user_auth("playlist-read-private"))
             clear()
         elif (user_input) == ("6"):
             clear()
             # Asks user if a public or private playlist is for tracks to be
-            # removed or deleted.
+            # removed or deleted from.
             public_private = input(
                 info(green("Public or Private Playlist: ")))
             if (public_private) == ("Public"):
                 public_scope = "playlist-modify-public"
-                # Scope is passed in as variable for user_auth()
+                # Executes playlist(), user_auth() passed in to get username
+                # and token for use. Scope passed in for user_auth().
                 playlist(user_auth(public_scope))
                 clear()
             elif (public_private) == ("Private"):
                 private_scope = "playlist-modify-private"
-                # Scope is passed in as variable for user_auth()
+                # Executes playlist(), user_auth() passed in to get username
+                # and token for use. Scope passed in for user_auth().
                 playlist(user_auth(private_scope))
                 clear()
             else:
-                clear()
+                pass
         elif (user_input) == ("7"):
             clear()
             exit()
@@ -87,7 +87,6 @@ def spotiterm():
             # Catch invalid menu option input.
             print(green("Input a valid menu option."))
             sleep(2)
-            clear()
 
 
 spotiterm()
