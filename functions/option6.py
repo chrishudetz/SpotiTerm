@@ -21,25 +21,10 @@ Returns:
 
 def add_del_track():
     try:
-        track_numbers = input(
-            info(green("One or more tracks: One or More: ")))
-        if (track_numbers) == ("One"):
-            # Single track ID select. Input track ID.
-            # .split() is used due to user_playlist_add_tracks and
-            # user_playlist_remove_all_occurrences_of_tracks accepting track_ids
-            # as list only. .split() makes it a list object.
-            track_ids = input(info(green("Input track ID: "))).split()
-            # Return track_ids for use in playlist()
-            return track_ids
-        elif (track_numbers) == ("More"):
-            # Input tracks seperated by ","
-            track_ids = input(
-                info(green("Track Ids seperated by , : "))).split(",")
-            # Return track_ids for use in playlist()
-            return track_ids
-        else:
-            print(green("Input a valid option: "))
-            add_del_track()
+        print(info(green("Input one or more track(s): seperated by , if multiple")))
+        # Input tracks, seperated by "," if multiple.
+        track_ids = input(info(green("Tracks: "))).split()
+        return track_ids
     # Not sure what exception is thrown here. Future Improvement.
     except:
         print(green("""

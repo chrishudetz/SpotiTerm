@@ -5,7 +5,6 @@ try:
     # Import all functions for usage in SpotiTerm.py (main entry.)
     from huepy import green, info
     from time import sleep
-    from functions.config import CLIENT_ID, CLIENT_S, REDIRECT_URI
     from functions.authentication import user_auth, auth
     from functions.spotiterm_func import menu_options, logo, clear
     from functions.option1 import track_search, browser_open
