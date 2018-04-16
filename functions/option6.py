@@ -23,7 +23,7 @@ def add_del_track():
     try:
         print(info(green("Input one or more track(s): seperated by , if multiple")))
         # Input tracks, seperated by "," if multiple.
-        track_ids = input(info(green("Tracks: "))).split()
+        track_ids = input(info(green("Tracks: "))).split(",")
         return track_ids
     # Not sure what exception is thrown here. Future Improvement.
     except:
