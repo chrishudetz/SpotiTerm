@@ -8,6 +8,7 @@ try:
     from time import sleep
     # Required for obtaining token for procedure user_top_tracks.
     from .authentication import user_auth
+    from .spotiterm_func import clear
 except ImportError:
     print("Failed to import modules for option3.py")
 
@@ -27,6 +28,8 @@ def user_top_tracks(username_token):
         # Unpack returns from user_auth(): authentication.py
         username, token = username_token
         if token:
+            # clear() to remove authentication text.
+            clear()
             sp = spotipy.Spotify(auth=token)
             short_term = "short_term"
             long_term = "long_term"

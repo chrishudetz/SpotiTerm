@@ -15,11 +15,10 @@ This is a entertainment project for me, as I'm an avid Spotify user!
   4. Get the user's top artists (Short and Long term).
   5. Show user's playlists, total tracks for each playlist, artist and track name.
   6. Add -- Delete track(s) from a given playlist. Both public and private playlists supported.
+  7. Player Controls -- **Requires a premium Spotify account.**
 
 ### Future Features -- Changes in mind
-  1. Player Controls: Play, Pause, Seek, shuffle, repeat, current playback info etc.
-  2. Track audio analysis.
-  3. and More!
+  1. Track audio analysis.
 
 ## Dependencies
 SpotiTerm is written in Python 3 so it is **REQUIRED**.
@@ -28,7 +27,7 @@ To utilise SpotiTerm's open URL feature, Google Chrome **must** be installed on 
 
 SpotiTerm requires the following dependencies:
   1. * [Spotipy](https://github.com/plamere/spotipy) - A light weight Python library for the Spotify Web API.
-  2. * [Hue](https://github.com/UltimateHackers/hue) - Provides a minimal and powerful interface to print colored text and labels in the terminal.
+  2. * [Hue](https://github.com/UltimateHackers/hue) - Provides a minimal and powerful interface to print coloured text and labels in the terminal.
 
 ## Prerequisites
 To operate SpotiTerm you must:

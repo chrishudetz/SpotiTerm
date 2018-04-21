@@ -7,6 +7,7 @@ try:
     from huepy import green, info
     from time import sleep
     from .authentication import user_auth
+    from .spotiterm_func import clear
 except ImportError:
     print("Failed to import modules for option6.py")
 
@@ -15,7 +16,7 @@ Option 6. This function is called within playlist(). Asks if the user wants to
 add one or more tracks. Asks for track URI input(s) and returns variable for
 usage in playlist()
 Returns:
-    2 x track_ids
+    track_ids
 """
 
 
@@ -49,6 +50,8 @@ def playlist(username_token):
         # Unpack returns from user_auth(): authentication.py
         username, token = username_token
         if token:
+            # clear() to remove authentication text.
+            clear()
             sp = spotipy.Spotify(auth=token)
             playlist_id = input(info(green("Please enter the Playlist ID: ")))
             add_delete = input(info(green("Add or Delete Tracks: ")))

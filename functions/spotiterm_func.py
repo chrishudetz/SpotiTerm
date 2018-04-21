@@ -28,7 +28,8 @@ def menu_options():
     print(green(" ""4. Get User's Top Artists"))
     print(green(" ""5. Show User's Playlists Tracks"))
     print(green(" ""6. Add -- Delete Track(s) From Playlist"))
-    print(green(" ""7. Exit SpotiTerm"))
+    print(green(" ""7. Player Controls: Premium Required"))
+    print(green(" ""8. Exit SpotiTerm"))
 
 
 """

@@ -11,8 +11,9 @@ try:
     from functions.option2 import artist_top_10
     from functions.option3 import user_top_tracks
     from functions.option4 import user_top_artist
-    from functions.option5 import list_tracks, playlist_contents
-    from functions.option6 import add_del_track, playlist
+    from functions.option5 import playlist_contents
+    from functions.option6 import playlist
+    from functions.option7 import get_devices, player_controls
 except ImportError:
     print("Imports failed. Examine Error.")
 
@@ -35,30 +36,25 @@ def spotiterm():
             # Executes track_search(), passing in auth() return (sp object) into
             # it. Then browser_open() executes.
             browser_open(track_search(auth()))
-            clear()
         elif (user_input) == ("2"):
             clear()
             # Executes artist_top_10(), passing in auth() return (sp object).
             artist_top_10(auth())
-            clear()
         elif (user_input) == ("3"):
             clear()
             # Executes user_top_tracks(), user_auth() passed in to get username
             # and token for use. Scope passed in for user_auth().
             user_top_tracks(user_auth("user-top-read"))
-            clear()
         elif (user_input) == ("4"):
             clear()
             # Executes user_top_artist(), user_auth() passed in to get username
             # and token for use. Scope passed in for user_auth().
             user_top_artist(user_auth("user-top-read"))
-            clear()
         elif (user_input) == ("5"):
             clear()
             # Executes playlist_contents(), user_auth() passed in to get username
             # and token for use. Scope passed in for user_auth().
             playlist_contents(user_auth("playlist-read-private"))
-            clear()
         elif (user_input) == ("6"):
             clear()
             # Asks user if a public or private playlist is for tracks to be
@@ -70,16 +66,18 @@ def spotiterm():
                 # Executes playlist(), user_auth() passed in to get username
                 # and token for use. Scope passed in for user_auth().
                 playlist(user_auth(public_scope))
-                clear()
             elif (public_private) == ("Private"):
                 private_scope = "playlist-modify-private"
                 # Executes playlist(), user_auth() passed in to get username
                 # and token for use. Scope passed in for user_auth().
                 playlist(user_auth(private_scope))
-                clear()
             else:
-                pass
+                print(green("Input a valid menu option."))
+                sleep(2)
         elif (user_input) == ("7"):
+            clear()
+            player_controls(get_devices(user_auth("user-read-playback-state")))
+        elif (user_input) == ("8"):
             clear()
             exit()
         else:
