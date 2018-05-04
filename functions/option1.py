@@ -9,8 +9,7 @@ try:
     from .authentication import auth
     # For exception in function (track_search)
     import spotipy.oauth2
-    import subprocess
-    import platform
+    import webbrowser
 except ImportError:
     print("Failed to import modules for option1.py")
 
@@ -50,11 +49,11 @@ def track_search(sp):
 
 
 """
-Option 1 browser_open. Opens specified user track in Google Chrome.
+Option 1 browser_open. Opens specified user track in default system web browser.
 Args:
-    URL. Passed from track_search()
+    URL. Passed into this procedure.
 Exceptions:
-    subprocess.CalledProcessError
+    webbrowser.Error
 """
 
 
@@ -62,22 +61,13 @@ def browser_open(url):
     try:
         if url:
             user_input = input(
-                green("Open track in Google Chrome: Yes or No "))
+                green("Open track in your browser?: Yes or No "))
             if (user_input) == ("Yes"):
-                # Holds result for os check.
-                user_platform = platform.system()
-                # If Darwin (Mac)
-                if (user_platform) == ("Darwin"):
-                    # Execute command to open Google Chrome with url
-                    subprocess.call(
-                        ["/usr/bin/open", "-a", "/Applications/Google Chrome.app", url])
-                elif (user_platform) == ("Linux"):
-                    subprocess.call(["google-chrome", url])
-                elif (user_platform) == ("Windows"):
-                    subprocess.call(["chrome.exe", url])
+                # Opens URL in default system browser.
+                webbrowser.open(url)
             else:
                 # If any other input ie No. Exit to main menu (spotiterm)
                 pass
-    except subprocess.CalledProcessError:
-        print(green("Failed. Check your system has Chrome installed."))
+    except webbrowser.Error:
+        print(green("Failed to open url in your browser."))
         sleep(2)

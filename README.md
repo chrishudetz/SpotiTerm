@@ -9,7 +9,7 @@ This is my first project I have ever uploaded to Github, so please keep this in 
 This is a entertainment project for me, as I'm an avid Spotify user!
 
 ## Current Features
-  1. Track Search; Open track URL in Google Chrome (Cross Platform Supported).
+  1. Track Search; Open track URL in browser.
   2. Artist Top Tracks; Given artist name.
   3. Get the user's top tracks (Short and Long term).
   4. Get the user's top artists (Short and Long term).
@@ -22,8 +22,6 @@ This is a entertainment project for me, as I'm an avid Spotify user!
 
 ## Dependencies
 SpotiTerm is written in Python 3 so it is **REQUIRED**.
-
-To utilise SpotiTerm's open URL feature, Google Chrome **must** be installed on the host.
 
 SpotiTerm requires the following dependencies:
   1. * [Spotipy](https://github.com/plamere/spotipy) - A light weight Python library for the Spotify Web API.
