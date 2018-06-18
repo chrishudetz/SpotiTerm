@@ -58,7 +58,8 @@ Exceptions:
 def clear():
     try:
         # execute "cls" if os is windows else execute "clear".
-        subprocess.call(["cls" if platform.system() == "Windows" else "clear"])
+        subprocess.call(["cls" if platform.system() ==
+                         "Windows" else "clear"], shell=True)
     except subprocess.CalledProcessError:
         print(green("Terminal clear failed."))
         sleep(2)
