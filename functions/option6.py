@@ -8,8 +8,8 @@ try:
     from time import sleep
     from .authentication import user_auth
     from .spotiterm_func import clear
-except ImportError:
-    print("Failed to import modules for option6.py")
+except ImportError as err:
+    print(f"Failed to import modules for option6.py: {err}")
 
 """
 Option 6. This function is called within playlist(). Asks if the user wants to
@@ -26,7 +26,7 @@ def add_del_track():
         # Input tracks, seperated by "," if multiple.
         track_ids = input(info(green("Tracks: "))).split(",")
         return track_ids
-    # Not sure what exception is thrown here. Future Improvement.
+    # Exception here is unlikely however, basic handle has been done.
     except:
         print(green("""
                     add_del_track function failed.
@@ -60,7 +60,7 @@ def playlist(username_token):
                 track_ids = add_del_track()
                 # Holds resp from function add tracks. Passes in track_ids
                 # returned from add_del_track()
-                resp = sp.user_playlist_add_tracks(
+                sp.user_playlist_add_tracks(
                     username, playlist_id, track_ids)
                 # If successfull; print tracks added.
                 print(green(" ""Track(s) Added."))
@@ -68,7 +68,7 @@ def playlist(username_token):
                 # Holds resp from function add tracks. Passes in track_ids
                 # returned from add_del_track()
                 track_ids = add_del_track()
-                resp1 = sp.user_playlist_remove_all_occurrences_of_tracks(
+                sp.user_playlist_remove_all_occurrences_of_tracks(
                     username, playlist_id, track_ids)
                 # Prints if successfull.
                 print(green(" ""Track(s) Removed."))
@@ -76,16 +76,16 @@ def playlist(username_token):
                 # If neither Add or Delete specified. Exit to main menu.
                 print(green("Neither Add or Delete; Exiting to main menu."))
         else:
-            print(green("Can't get token for {}".format(username)))
+            print(green(f"Can't get token for {username}"))
             sleep(2)
         # Sleep to observe short output. Then exits to main menu.
         sleep(2)
-    except spotipy.client.SpotifyException:
-        print(green("Failed to Add // Delete Track(s)"))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Failed to Add // Delete Track(s): {err}"))
         sleep(2)
-    except TypeError:
-        print(green("""
+    except TypeError as err:
+        print(green(f"""
                     Track Inputs Failed. Failed to get redirect URL from browser.
-                    TypeError.
+                    {err}
                     """))
         sleep(2)
