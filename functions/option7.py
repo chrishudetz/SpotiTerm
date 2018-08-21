@@ -10,8 +10,8 @@ try:
     from .spotiterm_func import clear
     # Used in play_pause()
     from .option6 import add_del_track
-except ImportError:
-    print("Failed to import modules for option7.py")
+except ImportError as err:
+    print(f"Failed to import modules for option7.py: {err}")
 
 """
 This procedure is the menu for the player controls option. Executed from
@@ -34,15 +34,17 @@ def player_controls(device_info):
                 clear()
                 # Show device selected from get_devices()
                 print(
-                    green(" ""Device: {} -- ID: {} selected.".format(name_choice, id_choice)))
+                    green(f" Device: {name_choice} -- ID: {id_choice} selected."))
                 print()
-                print(green(" ""1. Currently Playing Info"))
-                print(green(" ""2. Play -- Pause -- Resume"))
-                print(green(" ""3. Next -- Previous"))
-                print(green(" ""4. Shuffle"))
-                print(green(" ""5. Seek"))
-                print(green(" ""6. Set Volume"))
-                print(green(" ""7. Back to Main Menu"))
+                print(green("""
+    1. Currently Playing Info
+    2. Play -- Pause -- Resume
+    3. Next -- Previous
+    4. Shuffle
+    5. Seek
+    6. Set Volume
+    7. Back to Main Menu
+                """))
                 user_input = input(info(green("Select Player Option: ")))
                 if (user_input) == ("1"):
                     # Clear executed to remove authentication text.
@@ -90,11 +92,11 @@ def player_controls(device_info):
         else:
             print("Couldn't get device name or ID.")
             sleep(2)
-    except UnboundLocalError:
-        print(green("Failed to get device information."))
+    except UnboundLocalError as err:
+        print(green(f"Failed to get device information: {err}"))
         sleep(2)
-    except TypeError:
-        print(green("Failed to get device information."))
+    except TypeError as err:
+        print(green(f"Failed to get device information: {err}"))
         sleep(2)
 
 
@@ -124,24 +126,24 @@ def get_devices(username_token):
             device_name_list = []
             # For device names and ids in resp, append each to corresponding
             # list.
-            for item, devices in enumerate(resp["devices"]):
+            for item, devices in enumerate(resp["devices"], 1):
                 device_name_list.append(devices["name"])
                 device_id_list.append(devices["id"])
                 device_name = devices["name"]
                 device_id = devices["id"]
-                print(green(
-                    " ""Device: {} -- Name: {} -- Device ID: {}".format(item, device_name, device_id)))
+                print(
+                    green(f" Device: {item} -- Name: {device_name} -- Device ID: {device_id}"))
             user_input = input(info(green("Select Device Number: ")))
             # Start from 0 due to python indexing starting at 0.
             # Support currently for only 4 devices. This is due to my own lack of knowledge.
             # Which ever device selected: Select data from corresponding lists.
-            if (user_input) == ("0"):
+            if (user_input) == ("1"):
                 id_choice = device_id_list[0]
                 name_choice = device_name_list[0]
-            elif (user_input) == ("1"):
+            elif (user_input) == ("2"):
                 id_choice = device_id_list[1]
                 name_choice = device_name_list[1]
-            elif (user_input) == ("2"):
+            elif (user_input) == ("3"):
                 id_choice = device_id_list[2]
                 name_choice = device_name_list[2]
             elif (user_input) == ("4"):
@@ -149,13 +151,13 @@ def get_devices(username_token):
                 name_choice = device_name_list[3]
             return name_choice, id_choice
         else:
-            print(green("Can't get token for {}".format(username)))
+            print(green(f"Can't get token for {username}"))
             sleep(2)
-    except spotipy.client.SpotifyException:
-        print(green("Failed to get devices."))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Failed to get devices: {err}"))
         sleep(2)
-    except UnboundLocalError:
-        print(green("Please select a valid device."))
+    except UnboundLocalError as err:
+        print(green(f"Please select a valid device: {err}"))
         sleep(2)
 
 
@@ -182,13 +184,13 @@ def current_play(username_token):
             track_name = resp["item"]["name"]
             album_name = resp["item"]["album"]["name"]
             artist_name = resp["item"]["album"]["artists"][0]["name"]
-            print(info(green("Track: {} -- Album: {} -- Artist: {} -- Playing: {} -- Progress: {}".format(
-                track_name, album_name, artist_name, is_playing, progress_ms))))
+            print(green(
+                f"Track: {track_name} -- Album: {album_name} -- Artist: {artist_name} -- Playing: {is_playing} -- Progress: {progress_ms}"))
             sleep(10)
         else:
-            print(green("Can't get token for {}".format(username)))
-    except spotipy.client.SpotifyException:
-        print(green("Failed to get current playing track."))
+            print(green(f"Can't get token for {username}"))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Failed to get current playing track: {err}"))
         sleep(2)
 
 
@@ -221,24 +223,24 @@ def play_pause(username_token, name_choice, id_choice):
                 try:
                     # Enter context URI
                     user_input = input(info(green("Enter URI: ")))
-                    resp = sp.start_playback(
-                        device_id=id_choice, context_uri=user_input)
-                    print(green(" ""Playback Started on {}".format(name_choice)))
+                    sp.start_playback(device_id=id_choice,
+                                      context_uri=user_input)
+                    print(green(f" Playback Started on {name_choice}"))
                     sleep(2)
                 except spotipy.client.SpotifyException:
                     # Except if playback already occuring.
-                    print(green(" ""Already playing. Please pause."))
+                    print(green(" Already playing."))
                     sleep(2)
             elif ((user_input) == ("Track")) or ((user_input) == ("Tracks")):
                 try:
                     # Input track(s) add_del_track() called for re-use.
                     # from option6.py
-                    resp = sp.start_playback(
+                    sp.start_playback(
                         device_id=id_choice, uris=add_del_track())
-                    print(green(" ""Playback Started on {}".format(name_choice)))
+                    print(green(f" Playback Started on {name_choice}"))
                     sleep(2)
                 except spotipy.client.SpotifyException:
-                    print(green(" ""Already playing. Please pause."))
+                    print(green(" Already playing."))
                     sleep(2)
             else:
                 # Else statement if neither album, artist, playlist or track(s).
@@ -248,8 +250,8 @@ def play_pause(username_token, name_choice, id_choice):
         elif (user_input) == ("Pause"):
             try:
                 # Pause playback device.
-                resp = sp.pause_playback(device_id=id_choice)
-                print(green(" ""Paused on {}".format(name_choice)))
+                sp.pause_playback(device_id=id_choice)
+                print(green(f" Paused on {name_choice}"))
                 sleep(2)
             except spotipy.client.SpotifyException:
                 print(green("Playback already paused."))
@@ -257,18 +259,18 @@ def play_pause(username_token, name_choice, id_choice):
         elif (user_input) == ("Resume"):
             try:
                 # Resume playback device.
-                resp = sp.start_playback(device_id=id_choice)
-                print(green(" ""Resuming playback on {}".format(name_choice)))
+                sp.start_playback(device_id=id_choice)
+                print(green(f" Resuming playback on {name_choice}"))
                 sleep(2)
             except spotipy.client.SpotifyException:
-                print(green(" ""Already Playing."))
+                print(green(" Already Playing."))
                 sleep(2)
         else:
             # else statement if neither Play, pause or resume is selected.
             print(green("Input a valid menu option."))
             sleep(2)
     else:
-        print(green("Can't get token for {}".format(username)))
+        print(green(f"Can't get token for {username}"))
         sleep(2)
 
 
@@ -294,24 +296,24 @@ def next_previous(username_token, name_choice, id_choice):
             user_input = input(info(green("Next or Previous?: ")))
             if (user_input) == ("Next"):
                 # Skip track.
-                resp = sp.next_track(device_id=id_choice)
-                print(green(" ""Track skipped on {}".format(name_choice)))
+                sp.next_track(device_id=id_choice)
+                print(green(f" Track skipped on {name_choice}"))
                 sleep(2)
             elif (user_input) == ("Previous"):
                 try:
                     # Previous track.
-                    resp = sp.previous_track(device_id=id_choice)
-                    print(green(" ""Previous track on {}".format(name_choice)))
+                    sp.previous_track(device_id=id_choice)
+                    print(green(f" Previous track on {name_choice}"))
                 except spotipy.client.SpotifyException:
-                    print(green("No previous track avaliable."))
+                    print(green("No previous track available."))
                     sleep(2)
             else:
                 print(green("Input a valid menu option."))
                 sleep(2)
         else:
-            print(green("Can't get token for {}".format(username)))
-    except spotipy.client.SpotifyException:
-        print(green("Failed to skip -- go to previous track."))
+            print(green(f"Can't get token for {username}"))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Failed to skip -- go to previous track: {err}"))
 
 
 """
@@ -334,14 +336,14 @@ def shuffle(username_token, state, id_choice):
             clear()
             sp = spotipy.Spotify(auth=token)
             # State passed in from player_controls() Can be True or False.
-            resp = sp.shuffle(state, device_id=id_choice)
-            print(green(" ""Complete."))
+            sp.shuffle(state, device_id=id_choice)
+            print(green(" Complete."))
             sleep(2)
         else:
-            print(green("Can't get token for {}".format(username)))
+            print(green(f"Can't get token for {username}"))
             sleep(2)
-    except spotipy.client.SpotifyException:
-        print(green("Failed to shuffle."))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Failed to shuffle: {err}"))
         sleep(2)
 
 
@@ -368,17 +370,16 @@ def seek_track(username_token, name_choice, id_choice):
             progress_input = input(info(green("Skip to? (ms): ")))
             # Convert input to int.
             progress_int = int(progress_input)
-            resp = sp.seek_track(progress_int, device_id=id_choice)
-            print(green(" ""Track seeked to {} ms on {}.".format(
-                progress_int, name_choice)))
+            sp.seek_track(progress_int, device_id=id_choice)
+            print(green(f" Track seeked to {progress_int}ms on {name_choice}"))
             sleep(2)
         else:
-            print(green("Can't get token for {}".format(username)))
-    except spotipy.client.SpotifyException:
-        print(green("Failed to seek to point on track."))
+            print(green(f"Can't get token for {username}"))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Failed to seek to point on track: {err}"))
         sleep(2)
-    except ValueError:
-        print(green("Input only an integer."))
+    except ValueError as err:
+        print(green(f"Input only an integer: {err}"))
         sleep(2)
 
 
@@ -406,19 +407,18 @@ def set_volume(username_token, name_choice, id_choice):
             # String input converted into integer.
             volume_int = int(volume)
             if (volume_int) >= (0) and (volume_int) <= (100):
-                resp = sp.volume(volume_int, device_id=id_choice)
-                print(green(" ""Volume set to {} for {}".format(
-                    volume_int, name_choice)))
+                sp.volume(volume_int, device_id=id_choice)
+                print(green(f" Volume set to {volume_int}% for {name_choice}"))
                 sleep(2)
             else:
                 print(green("Volume must be between 0 and 100 or equal to."))
                 sleep(2)
         else:
-            print(green("Can't get token for {}".format(username)))
+            print(green(f"Can't get token for {username}"))
             sleep(2)
-    except spotipy.client.SpotifyException:
-        print(green("Failed to set volume."))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Failed to set volume: {err}"))
         sleep(2)
-    except ValueError:
-        print(green("Input only an integer."))
+    except ValueError as err:
+        print(green(f"Input only an integer: {err}"))
         sleep(2)

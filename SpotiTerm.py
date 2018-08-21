@@ -14,9 +14,9 @@ try:
     from functions.option5 import playlist_contents
     from functions.option6 import playlist
     from functions.option7 import get_devices, player_controls
-except ImportError:
-    print("Imports failed. Examine Error.")
-
+except ImportError as err:
+    print(f"Imports Failed: {err}")
+    
 """
 The main menu procedure for SpotiTerm
 """

@@ -9,8 +9,8 @@ try:
     # Required for obtaining token for procedure user_top_tracks.
     from .authentication import user_auth
     from .spotiterm_func import clear
-except ImportError:
-    print("Failed to import modules for option3.py")
+except ImportError as err:
+    print(f"Failed to import modules for option3.py: {err}")
 
 """
 Option 3 Lookup a user's top tracks. Short and long term.
@@ -20,6 +20,7 @@ Args:
     username_token: Received from user_auth() in authentication.py
 Exceptions:
     spotipy.client.SpotifyException
+    TypeError
 """
 
 
@@ -31,28 +32,26 @@ def user_top_tracks(username_token):
             # clear() to remove authentication text.
             clear()
             sp = spotipy.Spotify(auth=token)
-            short_term = "short_term"
-            long_term = "long_term"
             print(green("Short Term Tracks"))
-            resp = sp.current_user_top_tracks(time_range=short_term, limit=11)
-            for i, item in enumerate(resp["items"]):
+            resp = sp.current_user_top_tracks(
+                time_range="short_term", limit=10)
+            for i, item in enumerate(resp["items"], 1):
                 # Prints item number. Track name, artist name.
-                print(green(" ""{} {} {} {}".format(
-                    i, item["name"], "--", item["artists"][0]["name"])))
+                print(
+                    green(f" {i} {item['name']} -- {item['artists'][0]['name']}"))
             print(green("Long Term Tracks"))
-            resp1 = sp.current_user_top_tracks(time_range=long_term, limit=11)
-            for i, item in enumerate(resp1["items"]):
-                # Prints item number. Track name, artist name.
-                print(green(" ""{} {} {} {}".format(
-                    i, item["name"], "--", item["artists"][0]["name"])))
+            resp = sp.current_user_top_tracks(time_range="long_term", limit=10)
+            for i, item in enumerate(resp["items"], 1):
+                print(
+                    green(f" {i} {item['name']} -- {item['artists'][0]['name']}"))
             # Sleep for user to observe output.
             sleep(15)
         else:
-            print(green("Can't get token for {}".format(username)))
+            print(green(f"Can't get token for {username}"))
             sleep(2)
-    except spotipy.client.SpotifyException:
-        print(green("User Top Track Lookup Failed."))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"User Top Track Lookup Failed: {err}"))
         sleep(2)
-    except TypeError:
-        print(green("Failed to get redirect URL from browser."))
+    except TypeError as err:
+        print(green(f"Failed to get redirect URL from browser: {err}"))
         sleep(2)

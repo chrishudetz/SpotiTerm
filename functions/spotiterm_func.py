@@ -11,8 +11,8 @@ try:
     from time import sleep
     # Import green from huepy to keep with colour scheme.
     from huepy import green
-except ImportError:
-    print("Imports failed.")
+except ImportError as err:
+    print(f"Imports failed: {err}")
 
 """
 The main_options procedure prints the logo and all menu options.
@@ -22,14 +22,16 @@ The main_options procedure prints the logo and all menu options.
 def menu_options():
     logo()
     # green() is from huepy. Helps stick to colour scheme.
-    print(green(" ""1. Track Search"))
-    print(green(" ""2. Artist Top 10"))
-    print(green(" ""3. Get User's Top Tracks"))
-    print(green(" ""4. Get User's Top Artists"))
-    print(green(" ""5. Show User's Playlists Tracks"))
-    print(green(" ""6. Add -- Delete Track(s) From Playlist"))
-    print(green(" ""7. Player Controls: Premium Required"))
-    print(green(" ""8. Exit SpotiTerm"))
+    print(green("""
+    1. Track Search
+    2. Artist Top 10
+    3. Get User's Top Tracks
+    4. Get User's Top Artists
+    5. Show User's Playlists Tracks
+    6. Add -- Delete Track(s) From Playlist
+    7. Player Controls: Premium Required
+    8. Exit SpotiTerm
+    """))
 
 
 """
