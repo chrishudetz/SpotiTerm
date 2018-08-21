@@ -9,8 +9,8 @@ try:
     # Required for obtaining token for procedure playlist_contents.
     from .authentication import user_auth
     from .spotiterm_func import clear
-except ImportError:
-    print("Failed to import modules for option5.py")
+except ImportError as err:
+    print(f"Failed to import modules for option5.py: {err}")
 
 """
 Option 5 lists artist name and track name.
@@ -24,8 +24,7 @@ def list_tracks(resp):
     for i, item in enumerate(resp["items"]):
         track = item["track"]
         # Print artist -- track name.
-        print(green(" ""{} -- {}".format(
-            track["artists"][0]["name"], track["name"])))
+        print(green(f" {track['artists'][0]['name']} -- {track['name']}"))
 
 
 """
@@ -35,6 +34,7 @@ Args:
     username_token: Received from user_auth() in authentication.py
 Exceptions:
     spotipy.client.SpotifyException
+    TypeError
 """
 
 
@@ -51,13 +51,13 @@ def playlist_contents(username_token):
             # For each playlist in playlists variable.
             for playlist in playlists["items"]:
                 # Check is owner and ID is equal to username provided.
-                if playlist["owner"]["id"] == (username):
+                if ((playlist["owner"]["id"]) == (username)):
                     print()
-                    print(green(" ""{}".format(playlist["name"])))
+                    print(green(f" {playlist['name']}"))
                     # Slows down output. Gives user time to read.
                     sleep(1)
-                    print(green(" ""Total Tracks: {}".format(
-                        playlist["tracks"]["total"])))
+                    print(
+                        green(f" Total Tracks: {playlist['tracks']['total']}"))
                     sleep(1)
                     # tracks,next fields required for usage in list_tracks()
                     resp = sp.user_playlist(
@@ -73,11 +73,11 @@ def playlist_contents(username_token):
             # Sleep to allow user to observe output.
             sleep(25)
         else:
-            print(green("Can't get token for {}".format(username)))
+            print(green(f"Can't get token for {username}"))
             sleep(2)
-    except spotipy.client.SpotifyException:
-        print(green("Playlist Lookup Failed."))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Playlist Lookup Failed: {err}"))
         sleep(2)
-    except TypeError:
-        print(green("Failed to get redirect URL from browser."))
+    except TypeError as err:
+        print(green(f"Failed to get redirect URL from browser: {err}"))
         sleep(2)
