@@ -66,6 +66,9 @@ def browser_open(url):
             else:
                 # If any other input ie No. Exit to main menu (spotiterm)
                 pass
+        else:
+            print(green("url was not recieved as parameter."))
+            sleep(2)
     except webbrowser.Error:
         print(green("Failed to open url in your browser."))
         sleep(2)
