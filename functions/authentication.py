@@ -33,8 +33,8 @@ def user_auth(scope):
         token = util.prompt_for_user_token(
             username, scope, client_id=CLIENT_ID, client_secret=CLIENT_S, redirect_uri=REDIRECT_URI, cache_path=f".cache-{username}")
         return username, token
-    except spotipy.oauth2.SpotifyOauthError:
-        print("User Authentication Failed.")
+    except spotipy.oauth2.SpotifyOauthError as err:
+        print(green(f"User Authentication Failed: {err}"))
         sleep(2)
 
 
@@ -57,5 +57,5 @@ def auth():
         # Return sp object. For use in non user required calls to API.
         return sp
     except spotipy.oauth2.SpotifyOauthError:
-        print("Authentication Failed! Check connection or CLIENT_ID or CLIENT_SECRET keys.")
+        print(green("Authentication Failed! Check connection or CLIENT_ID or CLIENT_SECRET keys."))
         sleep(2)
