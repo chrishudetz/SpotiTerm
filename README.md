@@ -4,7 +4,7 @@
 A Terminal Interface to interact with Spotify's Web API.
 
 ## Disclaimer
-This is my first project I have ever uploaded to Github, so please keep this in mind if I'm a little slow, still learning the flow of the website and open to feedback. Furthermore, I'm currently in academic studies so I do not have a lot of free time. Thanks, Dextroz.
+I'm currently in academic studies so I do not have a lot of free time. Thanks, Dextroz.
 
 This is a entertainment project for me, as I'm an avid Spotify user!
 
