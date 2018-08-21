@@ -10,8 +10,8 @@ try:
     # For exception in function (track_search)
     import spotipy.oauth2
     import webbrowser
-except ImportError:
-    print("Failed to import modules for option1.py")
+except ImportError as err:
+    print(f"Failed to import modules for option1.py: {err}")
 
 """
 Option 1 function. Searches track specified by user.
@@ -29,15 +29,13 @@ def track_search(sp):
         # User input for trackname
         track_name = input(info(green("What is the track name?")))
         # Resp holding results from search track.
-        resp = sp.search(q="track:" + track_name, limit=1,
+        resp = sp.search(q=f"track:{track_name}", limit=1,
                          type="track", market="GB")
         for item, track in enumerate(resp["tracks"]["items"]):
             # Gets URL for song searched.
-            url_dict = track["external_urls"]
-            # Gets URL value from key "spotify" in dict.
-            url = url_dict.get("spotify")
+            url = track["external_urls"]["spotify"]
             # Prints trackname and its spotify URL.
-            print(green(" ""Track: {}, URL: {}".format(track["name"], url)))
+            print(green(f" Track: {track['name']}, url: {url}"))
             # Returns URL so it can be used in browser_open()
             return url
     except spotipy.client.SpotifyException:
