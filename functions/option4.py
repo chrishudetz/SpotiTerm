@@ -9,8 +9,8 @@ try:
     # Required for obtaining token for procedure user_top_artist.
     from .authentication import user_auth
     from .spotiterm_func import clear
-except ImportError:
-    print("Failed to import modules for option4.py")
+except ImportError as err:
+    print(f"Failed to import modules for option4.py: {err}")
 
 """
 Option 4 Get user's top artists; short and long term.
@@ -18,6 +18,7 @@ Args:
     username_token: Received from user_auth() in authentication.py
 Exceptions:
     spotipy.client.SpotifyException
+    TypeError
 """
 
 
@@ -29,25 +30,25 @@ def user_top_artist(username_token):
             # clear() to remove authentication text.
             clear()
             sp = spotipy.Spotify(auth=token)
-            short_term = "short_term"
-            long_term = "long_term"
             print(green("Short Term Artists"))
-            resp = sp.current_user_top_artists(time_range=short_term, limit=11)
-            for i, item in enumerate(resp["items"]):
+            resp = sp.current_user_top_artists(
+                time_range="short_term", limit=10)
+            for i, item in enumerate(resp["items"], 1):
                 # Prints user's top short term artists.
-                print(green(" ""{} {}".format(i, item["name"])))
+                print(green(f" {i} {item['name']}"))
             print(green("Long Term Artists"))
-            resp1 = sp.current_user_top_artists(time_range=long_term, limit=11)
-            for i, item in enumerate(resp1["items"]):
+            resp = sp.current_user_top_artists(
+                time_range="long_term", limit=10)
+            for i, item in enumerate(resp["items"], 1):
                 # Prints user's top long term artists.
-                print(green(" ""{} {}".format(i, item["name"])))
+                print(green(f" {i} {item['name']}"))
             sleep(15)
         else:
-            print(green("Can't get token for {}".format(username)))
+            print(green(f"Can't get token for {username}"))
             sleep(2)
-    except spotipy.client.SpotifyException:
-        print(green("User Top Artist Lookup Failed."))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"User Top Artist Lookup Failed: {err}"))
         sleep(2)
-    except TypeError:
-        print(green("Failed to get redirect URL from browser."))
+    except TypeError as err:
+        print(green(f"Failed to get redirect URL from browser: {err}"))
         sleep(2)
