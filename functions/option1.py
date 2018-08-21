@@ -38,11 +38,11 @@ def track_search(sp):
             print(green(f" Track: {track['name']}, url: {url}"))
             # Returns URL so it can be used in browser_open()
             return url
-    except spotipy.client.SpotifyException:
-        print(green("Track lookup failed."))
+    except spotipy.client.SpotifyException as err:
+        print(green(f"Track lookup failed: {err}"))
         sleep(2)
-    except spotipy.oauth2.SpotifyOauthError:
-        print(green("Bad Request. Check Client ID, Client S."))
+    except spotipy.oauth2.SpotifyOauthError as err:
+        print(green(f"Bad Request. Check Client ID, Client S: {err}"))
         sleep(2)
 
 
@@ -69,6 +69,6 @@ def browser_open(url):
         else:
             print(green("url was not recieved as parameter."))
             sleep(2)
-    except webbrowser.Error:
-        print(green("Failed to open url in your browser."))
+    except webbrowser.Error as err:
+        print(green(f"Failed to open url in your browser: {err}"))
         sleep(2)
