@@ -33,14 +33,17 @@ def user_top_tracks(username_token):
             clear()
             sp = spotipy.Spotify(auth=token)
             print(green("Short Term Tracks"))
-            resp = sp.current_user_top_tracks(time_range="short_term", limit=10)
+            resp = sp.current_user_top_tracks(
+                time_range="short_term", limit=10)
             for i, item in enumerate(resp["items"], 1):
                 # Prints item number. Track name, artist name.
-                print(green(f" {i} {item['name']} -- {item['artists'][0]['name']}"))
+                print(
+                    green(f" {i} {item['name']} -- {item['artists'][0]['name']}"))
             print(green("Long Term Tracks"))
             resp = sp.current_user_top_tracks(time_range="long_term", limit=10)
             for i, item in enumerate(resp["items"], 1):
-                print(green(f" {i} {item['name']} -- {item['artists'][0]['name']}"))
+                print(
+                    green(f" {i} {item['name']} -- {item['artists'][0]['name']}"))
             # Sleep for user to observe output.
             sleep(15)
         else:
