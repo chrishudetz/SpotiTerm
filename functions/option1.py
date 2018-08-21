@@ -21,6 +21,7 @@ Args:
     sp: auth() from authentication.py; Returns sp object.
 Exceptions:
     spotipy.client.SpotifyException
+    spotipy.oauth2.SpotifyOauthError
 """
 
 
