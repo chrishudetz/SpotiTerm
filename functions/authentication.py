@@ -11,14 +11,14 @@ try:
     from spotipy.oauth2 import SpotifyClientCredentials
     import spotipy.util as util
     from time import sleep
-except ImportError:
-    print("Imports failed for authentication.py")
+except ImportError as err:
+    print(f"Imports failed for authentication.py: {err}")
 
 """
 User authentication function. Asks for Spotify Username and scope is passed in for use
 for specific options.
 Args:
-    Scope = passed in as str when called at SpotiTerm.py
+    scope = passed in as str when called at SpotiTerm.py
 Returns:
     username, token
 Exceptions:
@@ -31,7 +31,7 @@ def user_auth(scope):
         username = input(info(green("Spotify Username: ")))
         # Token variable. scope passed in when called in SpotiTerm.py
         token = util.prompt_for_user_token(
-            username, scope, client_id=CLIENT_ID, client_secret=CLIENT_S, redirect_uri=REDIRECT_URI)
+            username, scope, client_id=CLIENT_ID, client_secret=CLIENT_S, redirect_uri=REDIRECT_URI, cache_path=f".cache-{username}")
         return username, token
     except spotipy.oauth2.SpotifyOauthError:
         print("User Authentication Failed.")
