@@ -26,9 +26,9 @@ SpotiTerm is written in Python 3 so it is **REQUIRED**.
 SpotiTerm requires the following dependencies:
   1. * [Spotipy](https://github.com/plamere/spotipy) - A light weight Python library for the Spotify Web API.
   2. * [Hue](https://github.com/UltimateHackers/hue) - Provides a minimal and powerful interface to print coloured text and labels in the terminal.
-  
-  Install using: 
-  ```pip3 install -r requirements.txt
+  Install using the command:
+  ```
+  pip3 install -r requirements.txt
   ```
 
 ## Prerequisites
